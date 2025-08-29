@@ -8,6 +8,44 @@
 
 <br>
 
+## 安装方法
+
+```shell
+# 使用 pip  安装
+pip install --upgrade build
+# 使用 uv 可以这样子
+uv pip install --upgrade build
+
+# 构建我们的包
+python -m build 
+# uv build
+uv run -m build
+```
+
+> 成功后，本地应该会有下面的文件结构
+
+```shell
+dist/
+ ├─ convert_ui-0.3.2-py3-none-any.whl
+ └─ convert_ui-0.3.2.tar.gz
+```
+
+> 本地安装测试
+
+```shell
+pip install dist/convert_ui-0.3.2-py3-none-any.whl
+```
+
+> 测试命令是否可以使用了
+
+```shell
+convert_ui -h
+```
+
+
+
+## 使用方法
+
 ```shell
 # 使用说明
 convert_ui -h 

@@ -1,2 +1,5 @@
 convert_ui.egg-info
 __pycache__
+build
+dist
+.venv
