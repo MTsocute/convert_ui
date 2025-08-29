@@ -1,3 +1,6 @@
+__VERSION__ = "0.3.5"
+
+import pathlib, tomllib
 import os, sys
 import subprocess
 import argparse
@@ -8,6 +11,11 @@ from rich_argparse import RichHelpFormatter
 # 创建 Rich Console 对象
 console = Console()
 
+def get_version():
+    pyproj = pathlib.Path(__file__).parent / "pyproject.toml"
+    with open(pyproj, "rb") as f:
+        data = tomllib.load(f)
+    return data["project"]["version"]
 
 def find_pyside6_uic():
     """
@@ -95,19 +103,29 @@ def main():
         help="显示帮助信息"
     )
     parser.add_argument(
+        "-v", "--version",
+        action="store_true",
+        help="显示版本信息"
+    )
+    parser.add_argument(
         "-t", "--target",
         # nargs="+",
         metavar="Target UI File(s)",
-        help="指定一个或多个 .ui 文件或文件夹路径 (默认: 当前目录下所有 .ui 文件)"
+        help="指定一个或多个 .ui 文件或文件夹路径 [dim](默认: 当前目录下所有 .ui 文件)[/dim]"
     )
     parser.add_argument(
         "-p", "--path",
         metavar="Output DIR",
-        help="指定生成 PyQt 文件存储的文件夹路径 (默认: [dim]./ui_files[/dim])"
+        help="指定生成 PyQt 文件存储的文件夹路径 [dim](默认: ./ui_files)[/dim]"
     )
+
 
     # * 解析外部获取的参数
     args = parser.parse_args()
+    
+    if args.version:
+        console.print(f"[bold yellow]VERSION[/] [bold blue]'v{__VERSION__}'[/]")
+        return
 
     output_dir = args.path if args.path else os.path.join(os.getcwd(), "ui_files")
 

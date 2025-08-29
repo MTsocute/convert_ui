@@ -1,5 +1,7 @@
 # README
+
 ---
+
 > [!note]
 >
 > - 这个工具用于转换 Qt 的 `* .ui` 文件为 `*.py `文件
@@ -41,8 +43,6 @@ pip install dist/convert_ui-0.3.2-py3-none-any.whl
 ```shell
 convert_ui -h
 ```
-
-
 
 ## 使用方法
 
