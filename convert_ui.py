@@ -1,5 +1,3 @@
-__VERSION__ = "0.3.5"
-
 import pathlib, tomllib
 import os, sys
 import subprocess
@@ -7,15 +5,16 @@ import argparse
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, BarColumn, TimeElapsedColumn
 from rich_argparse import RichHelpFormatter
+# 导入 importlib.metadata
+try:
+    from importlib.metadata import version
+except ImportError:
+    # Python 3.8 之前需要安装 importlib-metadata
+    from importlib_metadata import version
+
 
 # 创建 Rich Console 对象
 console = Console()
-
-def get_version():
-    pyproj = pathlib.Path(__file__).parent / "pyproject.toml"
-    with open(pyproj, "rb") as f:
-        data = tomllib.load(f)
-    return data["project"]["version"]
 
 def find_pyside6_uic():
     """
@@ -81,6 +80,12 @@ def main():
     主函数，处理命令行参数和转换逻辑。
     """
 
+    # ! 从 pyproject.toml 文件中动态获取版本信息
+    try:
+        current_version = version("convert-ui") # 这里的名字要和 pyproject.toml 中的 [project] name 对应
+    except Exception:
+        current_version = "unknown" # 如果包没有安装，就显示 unknown
+
     usage_string = ("[dim]convert_ui[/] [bold cyan][-t[/] "
                     "[bold green]UI_FILE(S)[/]"
                     "[bold cyan]][/] "
@@ -124,7 +129,7 @@ def main():
     args = parser.parse_args()
     
     if args.version:
-        console.print(f"[bold yellow]VERSION[/] [bold blue]'v{__VERSION__}'[/]")
+        console.print(f"[bold yellow]VERSION[/] [bold blue]'v{current_version}'[/]")
         return
 
     output_dir = args.path if args.path else os.path.join(os.getcwd(), "ui_files")
