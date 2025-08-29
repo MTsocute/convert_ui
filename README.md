@@ -11,40 +11,35 @@
 <br>
 
 ## 安装方法
+---
+> [!important]
+> 请先去 release 下载 conver_ui-x.x.x.whl 文件 
+
+### pip 用户
 
 ```shell
-# 使用 pip  安装
-pip install --upgrade build
-# 使用 uv 可以这样子
-uv pip install --upgrade build
-
-# 构建我们的包
-python -m build 
-# uv build
-uv run -m build
+pip install conver_ui-x.x.x.whl
 ```
 
-> 成功后，本地应该会有下面的文件结构
+### uv 用户
 
 ```shell
-dist/
- ├─ convert_ui-0.3.2-py3-none-any.whl
- └─ convert_ui-0.3.2.tar.gz
+uv pip install conver_ui-x.x.x.whl
 ```
 
-> 本地安装测试
-
-```shell
-pip install dist/convert_ui-0.3.2-py3-none-any.whl
-```
+## 测试是否安装成功
 
 > 测试命令是否可以使用了
 
 ```shell
-convert_ui -h
+# 查看版本
+convert_ui -v
+```
+```txt
+VERSION 'vx.x.x'
 ```
 
-## 使用方法
+## 常用的一些功能
 
 ```shell
 # 使用说明
