@@ -1,10 +1,10 @@
-[build-system]
-requires = ["setuptools>=65.5.0", "wheel>=0.45.1"]
-build-backend = "setuptools.build_meta"
+[build-system]      # This is for python -m build, but we can use uv build as alternative
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "convert_ui"
-version = "0.3.6"
+version = "0.3.6.2"
 description = "Convert PyQt UI file to Qt corresponding py File"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -17,5 +17,12 @@ dependencies = [
     "rich-argparse>=1.7.1"
 ]
 
+# ========== Lib ==========
+# [tool.hatch.build.target.wheel]
+# * 这个会把对应的文件夹一起打包，那么不论是代码，还是配置文件都可以一齐上传
+# * 如果用的是虚拟环境安装了我们发布的包，就会在 .venv/Lib/site-packages/<文件夹名> 里面
+# packages = ["src/folder you wanna upload with"]   
+
+# ========== Scripts ==========
 [project.scripts]
 convert_ui = "convert_ui:main"
