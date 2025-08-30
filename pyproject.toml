@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "convert_ui"
-version = "0.3.6.3"
+version = "0.3.7"
 description = "Convert PyQt UI file to Qt corresponding py File"
 readme = "README.md"
 requires-python = ">=3.12"

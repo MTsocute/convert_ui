@@ -1,11 +1,7 @@
-name: Python application
+name: Python Package Publishing
 
+# 当创建一个新的 Release 时，触发此工作流
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  # 当创建一个新的 Release 时，触发此工作流
   release:
     types: [published]
 
@@ -34,7 +30,6 @@ jobs:
         pip install build twine
 
     - name: Build and Publish
-      if: github.event_name == 'release' && github.event.action == 'published'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
