@@ -12,34 +12,32 @@ on:
 permissions:
   contents: read
 
-# 里面的内容是 github 类似 docker 的主机做的
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 这一步非常重要，为后续的构建和上传提供权限
     permissions:
-      contents: write   # 允许推送标签和代码
+      contents: write
       id-token: write
       packages: write
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
+
     - name: Install build and upload tools
       run: |
-        python -m uv pip install --upgrade uv
-        # 安装 build 和 twine 工具
-        uv pip install build twine
+        python -m pip install --upgrade pip
+        pip install build twine
+
     - name: Build and Publish
-      # 仅在发布新的 Release 时执行此步骤
       if: github.event_name == 'release' && github.event.action == 'published'
       env:
-        # 使用 PyPI 的 API Token 进行身份验证
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        # 使用标准的 Python build 命令
         python -m build
         twine upload dist/*
