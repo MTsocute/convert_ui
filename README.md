@@ -13,24 +13,8 @@
 ## 安装方法
 ---
 
-
-### pip 用户
-
-> [!important]
-> 请先去 release 下载 `conver_ui-x.x.x.whl` 文件 
-
-```shell
-pip install conver_ui-x.x.x.whl
-```
-> 或者直接使用 `pip` 通过 PyPi 安装
 ```shell
 pip install conver_ui
-```
-
-### uv 用户
-
-```shell
-uv pip install conver_ui-x.x.x.whl
 ```
 
 ## 测试是否安装成功
